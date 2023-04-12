@@ -5,10 +5,10 @@ const SQRT_PI = √π;
 const PI = π;
 const EPSILON = 1e-8;
 
-filtered_data = CSV.read("src/r4/estimation_sample_007.csv", DataFrame);
+filtered_data = CSV.read("estimation_sample_007.csv", DataFrame);
 # load the last best guess of parameters from the previous run
-initparams = CSV.read("parameters/params1_nosq_002.csv", DataFrame);
-params_nosq0 = initparams[:,1][1:end-1]
+initparams = CSV.read("res_nosq_001.csv", DataFrame);
+params_nosq0 = initparams[:,1] #[1:end-1] #needed if you also save LL with the params vec
 @with_kw mutable struct FertilityModel
     #=Dynamic discrete choice model
     Contains all the parameters for the base DDC model.
@@ -713,4 +713,4 @@ print("Minimizer for marr, divorced, widowed = ", res_nosq.minimizer, "\n")
 df_res_nosq = DataFrame(p_vec = res_nosq.minimizer)
 
 # Write the dataframes to csv file
-CSV.write("parameters/res_nosq_001.csv", df_res_nosq)
+CSV.write("parameters/res_nosq_002.csv", df_res_nosq)
